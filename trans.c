@@ -47,6 +47,22 @@ void trans(int M, int N, int A[N][M], int B[M][N])
 }
 
 /*
+* trans1 - A simple basline transpose function, not optimized for the cache.
+*/
+char trans1_desc[] = "Simple col-wise scan transpose";
+void trans1(int M, int N, int A[N][M], int B[M][N])
+{
+    int i, j, tmp;
+
+    for (i = 0; i < M; i++) {
+        for (j = 0; j < N; j++) {
+            tmp = A[j][i];
+            B[i][j] = tmp;
+        }
+    }
+}
+
+/*
  * registerFunctions - This function registers your transpose
  *     functions with the driver.  At runtime, the driver will
  *     evaluate each of the registered functions and summarize their
@@ -60,6 +76,7 @@ void registerFunctions()
 
     /* Register any additional transpose functions */
     registerTransFunction(trans, trans_desc); 
+    registerTransFunction(trans1, trans1_desc);
 
 }
 
